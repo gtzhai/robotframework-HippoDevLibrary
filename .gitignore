@@ -1,0 +1,6 @@
+/venv
+/build
+/dist
+/.idea
+/robot/results
+/robot/*.robot
