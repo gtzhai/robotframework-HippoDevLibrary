@@ -6,6 +6,7 @@ import shutil
 def clean(ctx):
    shutil.rmtree("./build")
    shutil.rmtree("./dist")
+   shutil.rmtree("./src/robotframework_HippoDevLibrary_dev.egg-info")
 
 @task
 def pack(ctx):
@@ -21,8 +22,8 @@ def uninstall(ctx):
 
 @task()
 def reinstall(ctx):
-    clean(ctx)
     pack(ctx)
     uninstall(ctx)
     install(ctx)
+    clean(ctx)
 

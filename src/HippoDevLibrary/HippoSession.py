@@ -9,12 +9,13 @@ def do_if_special_realization_exists(fn):
         fnclass = args[0]
         addr = args[1]
         session = fnclass.session
-        #logger.warn('decorator in' + addr + ' ' + fn.__name__)
         #for i in range(len(args)):
         #    logger.warn(args[i])
         dev = session.has_special_realization(addr, fn.__name__)
+        #logger.warn('decorator in' + addr + ' ' + fn.__name__)
         if dev == None:
-            fn(*args)
+            #logger.warn('dev is none')
+            return fn(*args)
         else:
             fns = getattr(dev, fn.__name__)
             if len(args) > 1:
@@ -24,9 +25,9 @@ def do_if_special_realization_exists(fn):
                 #logger.warn(len(argss))
                 #for i in range(len(argss)):
                 #    logger.warn(argss[i])
-                fns(*argss)
+                return fns(*argss)
             else:
-                fns()
+                return fns()
     return decorator
 
 class HippoVisaSession(object):
@@ -57,8 +58,10 @@ class HippoSession(object):
         #logger.warn('in' + addr + ' and member:' + member)
         name = self.session_name_get(addr)
         #logger.warn(name + ' and member:' + member)
-        self.devs.is_dev_have_member(name, member)
-        return self.devs.get_dev(name)
+        if self.devs.is_dev_have_member(name, member):
+            return self.devs.get_dev(name)
+        else:
+            return None
 
     def session_exists(self, addr):
         try:

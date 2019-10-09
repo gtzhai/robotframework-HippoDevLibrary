@@ -4,17 +4,20 @@ from HippoDevLibrary.robotlibcore import keyword
 from HippoDevLibrary.HippoScope import HippoScope
 from HippoDevLibrary.HippoDDS import HippoDDS
 from HippoDevLibrary.HippoSession import do_if_special_realization_exists
+import HippoDevLibrary.eel as eel
 
 class HippoDev(HippoScope, HippoDDS):
-
+    hippo_dev = None
     def __init__(self, session):
         self.session = session
         HippoScope.__init__(self, session)
         HippoDDS.__init__(self, session)
+        hippo_dev = self
         pass
 
     @keyword
     @do_if_special_realization_exists
+    @eel.expose
     def get_idn(self, addr):
         #dev = self.session.has_special_realization(addr, sys._getframe().f_code.co_name)
         #if dev != None:

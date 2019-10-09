@@ -39,5 +39,6 @@ setup(
     classifiers      = CLASSIFIERS,
     install_requires = REQUIREMENTS,
     package_dir      = {'': 'src'},
+    include_package_data = True,
     packages         = find_packages('src')
 )
