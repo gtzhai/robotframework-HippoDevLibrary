@@ -16,6 +16,17 @@ class HippoDev(HippoScope, HippoDDS):
         pass
 
     @keyword
+    def query(self, addr, cmd):
+        logger.warn('query in:' + addr + "  " + cmd)
+        ret = self.session.query(addr, cmd)
+        logger.warn('query ret:' + ret)
+        return ret
+
+    @keyword
+    def write(self, addr, cmd):
+        self.session.write(addr, cmd)
+
+    @keyword
     @do_if_special_realization_exists
     @eel.expose
     def get_idn(self, addr):

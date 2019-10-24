@@ -86,11 +86,12 @@ class HippoSession(object):
 
     @keyword
     def session_connect(self, addr, name=''):
+        #logger.warn('session connect in 1' + addr + ' and member:' + name)
         if(not self.session_exists(addr)):
+            #logger.warn('session connect in 2' + addr + ' and member:' + name)
             visa_dev = HippoVisaSession.session_connect(addr)
             self._cache.register(visa_dev, addr)
             if len(name) != 0:
-                if name != 'default':
                     self._name_cache.register(name, addr)
 
     @keyword

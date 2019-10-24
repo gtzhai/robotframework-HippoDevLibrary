@@ -8,6 +8,11 @@ Library           HippoDevLibrary
     session_connect     ${dev}      ${name}
     get_idn     ${dev}
 
+机器应该活着
+    [arguments]     ${dev}
+    ${ret}  get_idn     ${dev}
+    Should Not Be Empty     ${ret}
+
 断开机器
     [arguments]     ${dev}
     session_disconnect      ${dev}
